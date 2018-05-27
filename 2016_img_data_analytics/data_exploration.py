@@ -33,26 +33,37 @@ df_0 = df[df['Test_ID'] == 0]
 df_1 = df[df['Test_ID'] == 1]
 df_2 = df[df['Test_ID'] == 2]
 
-from sklearn.model_selection import train_test_split
+# For each of the tests, take out one PWP and one control for test data
+df_0_test_pwp = df[df['Subject'] == 77]
+df_0_test_ctrl = df[df['Subject'] == 1]
+df_0_test_pwp = df_0_test_pwp.drop(['Subject', 'Test_ID', 'Timestamp', 'Z'], axis=1)
+df_0_test_ctrl = df_0_test_ctrl.drop(['Subject', 'Test_ID', 'Timestamp', 'Z'], axis=1)
+df_0_test_pwp.to_csv('test_0_pwp_subject.csv', index=False)
+df_0_test_ctrl.to_csv('test_0_ctrl_subject.csv', index=False)
+df_0_train = df[df['Subject'] != 77]
+df_0_train = df_0_train[df_0_train['Subject'] != 1]
+df_0_train = df_0_train.drop(['Subject', 'Test_ID', 'Timestamp', 'Z'], axis=1)
+df_0_train.to_csv('train_0.csv', index=False)
 
-df_0 = df_0.drop(['Subject', 'Test_ID','Timestamp', 'Z'], axis=1)
-train_0, test_0 = train_test_split(df_0, test_size=0.25)
-train_0.to_csv('train_0.csv', index=False)
-test_0.to_csv('test_0.csv', index=False)
-
-df_1 = df_1.drop(['Subject', 'Test_ID','Timestamp', 'Z'], axis=1)
-train_1, test_1 = train_test_split(df_1, test_size=0.25)
-train_1.to_csv('train_1.csv', index=False)
-test_1.to_csv('test_1.csv', index=False)
-
-df_2 = df_2.drop(['Subject', 'Test_ID','Timestamp', 'Z'], axis=1)
-train_2, test_2 = train_test_split(df_2, test_size=0.25)
-train_2.to_csv('train_2.csv', index=False)
-test_2.to_csv('test_2.csv', index=False)
+# from sklearn.model_selection import train_test_split
+#
+# df_0 = df_0.drop(['Subject','Test_ID','Timestamp', 'Z'], axis=1)
+# train_0, test_0 = train_test_split(df_0, test_size=0.25)
+# train_0.to_csv('train_0.csv', index=False)
+# test_0.to_csv('test_0.csv', index=False)
+#
+# df_1 = df_1.drop(['Subject', 'Test_ID','Timestamp', 'Z'], axis=1)
+# train_1, test_1 = train_test_split(df_1, test_size=0.25)
+# train_1.to_csv('train_1.csv', index=False)
+# test_1.to_csv('test_1.csv', index=False)
+#
+# df_2 = df_2.drop(['Subject', 'Test_ID','Timestamp', 'Z'], axis=1)
+# train_2, test_2 = train_test_split(df_2, test_size=0.25)
+# train_2.to_csv('train_2.csv', index=False)
+# test_2.to_csv('test_2.csv', index=False)
 
 import sklearn
 import numpy as np
-
 
 X = df_0.drop(['Subject', 'PWP', 'Test_ID', 'Timestamp', 'Z'], axis=1)
 y = df_0['PWP']
