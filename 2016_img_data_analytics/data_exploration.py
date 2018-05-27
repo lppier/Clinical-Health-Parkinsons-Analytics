@@ -34,10 +34,12 @@ df_1 = df[df['Test_ID'] == 1]
 df_2 = df[df['Test_ID'] == 2]
 
 # For each of the tests, take out one PWP and one control for test data
-df_0_test_pwp = df[df['Subject'] == 77]
-df_0_test_ctrl = df[df['Subject'] == 1]
+df_0_test_pwp = df_0[df_0['Subject'] == 77]
+df_0_test_ctrl = df_0[df_0['Subject'] == 1]
 df_0_test_pwp = df_0_test_pwp.drop(['Subject', 'Test_ID', 'Timestamp', 'Z'], axis=1)
 df_0_test_ctrl = df_0_test_ctrl.drop(['Subject', 'Test_ID', 'Timestamp', 'Z'], axis=1)
+df_combined_pwp_ctrl = pd.concat([df_0_test_ctrl, df_0_test_pwp])
+df_combined_pwp_ctrl.to_csv('test_0_pwp_comb_ctrl.csv', index=False)
 df_0_test_pwp.to_csv('test_0_pwp_subject.csv', index=False)
 df_0_test_ctrl.to_csv('test_0_ctrl_subject.csv', index=False)
 df_0_train = df[df['Subject'] != 77]
