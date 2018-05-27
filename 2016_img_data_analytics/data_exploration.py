@@ -60,16 +60,16 @@ df_1_train = df_1_train[df_1_train['Subject'] != 1]
 df_1_train = df_1_train.drop(['Subject', 'Test_ID', 'Timestamp'], axis=1)
 df_1_train.to_csv('train_1.csv', index=False)
 
-df_2_test_pwp = df_2[df_2['Subject'] == 77]
-df_2_test_ctrl = df_2[df_2['Subject'] == 1]
+df_2_test_pwp = df_2[df_2['Subject'] == 76]
+df_2_test_ctrl = df_2[df_2['Subject'] == 5]
 df_2_test_pwp = df_2_test_pwp.drop(['Subject', 'Test_ID', 'Timestamp'], axis=1)
 df_2_test_ctrl = df_2_test_ctrl.drop(['Subject', 'Test_ID', 'Timestamp'], axis=1)
 df2_combined_pwp_ctrl = pd.concat([df_2_test_ctrl, df_2_test_pwp])
 df2_combined_pwp_ctrl.to_csv('test_2_pwp_comb_ctrl.csv', index=False)
 df_2_test_pwp.to_csv('test_2_pwp_subject.csv', index=False)
 df_2_test_ctrl.to_csv('test_2_ctrl_subject.csv', index=False)
-df_2_train = df_2[df_2['Subject'] != 77]
-df_2_train = df_2_train[df_2_train['Subject'] != 1]
+df_2_train = df_2[df_2['Subject'] != 76]
+df_2_train = df_2_train[df_2_train['Subject'] != 5]
 df_2_train = df_2_train.drop(['Subject', 'Test_ID', 'Timestamp'], axis=1)
 df_2_train.to_csv('train_2.csv', index=False)
 
